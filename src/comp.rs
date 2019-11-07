@@ -2,6 +2,6 @@
  * a lossless hash on it
  * The method takes in a String of the file to be compressed
  */
-fn comp(file: &str){
+pub fn rzip(file: &str){
     //XXX deal with compressing the files contents
 }
