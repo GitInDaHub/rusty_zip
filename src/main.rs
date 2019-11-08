@@ -2,6 +2,8 @@ mod comp;
 mod decomp;
 
 use std::io;
+
+
 fn main() {
     
     //prompts user for filename through the command line

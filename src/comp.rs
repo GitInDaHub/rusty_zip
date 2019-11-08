@@ -1,7 +1,10 @@
+mod h_tree;
+
 use std::fs::File;
 use std::io::{Read, Write};
 use std::vec;
 use std::iter::IntoIterator;
+
 const ASCII: usize = 256;
 /* This method takes in a file and compresses its contents into a smaller file and then does
  * a lossless hash on it
@@ -29,7 +32,12 @@ pub fn rzip(file_name: &mut str){
     for &x in &char_vect{
 	frequency[x as usize] = frequency[x as usize] + 1;
     }
+
+    //creating huffman tree obejct
+    let mut tree = htree::Tree::new();
    
+    //builds the huffman tree
+    h_tree::build(&mut tree, &mut frequency);
     /* XXX Testing to see if frequenchy array filled in correctly XXX
     for &y in frequency.iter(){
 	println!("{}",y);
