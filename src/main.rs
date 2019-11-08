@@ -16,6 +16,8 @@ fn main() {
     //removes excess characters from the string retrieved from user
     buffer = String::from(buffer.trim());
 
+    // Checks whether or not file entered is already zipped or unzipped and calls
+    // appropriate method according to the file entered
     if buffer.ends_with(".rzip") {
 	decomp::runzip(&mut buffer);
     }else{
