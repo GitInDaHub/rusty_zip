@@ -5,7 +5,7 @@ use priority_queue::PriorityQueue;
 pub struct Tree{
     
     pub root: *const i32,
-    pub leaves: PriorityQueue,
+    pub leaves: *const i32,
 
 }
 

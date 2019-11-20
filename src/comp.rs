@@ -7,12 +7,11 @@ use std::clone;
 use std::iter::IntoIterator;
 
 const ASCII: usize = 256;
-const FILE_SUFFIX: &mut str = ".zip".to_string();
 /* This method takes in a file and compresses its contents into a smaller file and then does
  * a lossless hash on it
  * The method takes in a String of the file to be compressed
  */
-pub fn rzip(in_file_name: &mut str){
+pub fn rzip(in_file_name: &mut String){
     //XXX deal with compressing the files content
     //opening file to be compressed
     let mut in_file = File::open(in_file_name).expect("in_File not opened.");
@@ -34,17 +33,16 @@ pub fn rzip(in_file_name: &mut str){
     for &x in &char_vect{
 	frequency[x as usize] = frequency[x as usize] + 1;
     }
-
+    let mut temp = PriorityQueue::new();
     //creating huffman tree obejct XXX create node objects and pass pointers
     let mut tree = crate::h_tree::Tree {
-	parent: 0 as *const i32, 
-	left: 0 as *const i32,
-	right: 0 as *const i32, 
-	data: '\0',
+	root: 0 as *const i32,
+	leaves: &*temp,
     };
     //creates a new string for the out_file_name
+    let mut file_suffix = String::from(".zip");
     let mut out_file_name = in_file_name.clone();
-    out_file_name = [out_file_name, FILE_SUFFIX].join("");
+    out_file_name = [out_file_name, file_suffix].join("");
  
     //builds the huffman tree
     crate::h_tree::build(&mut tree, &mut frequency);
